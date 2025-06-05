@@ -87,6 +87,20 @@
   <h1>Pop Mart Inventory</h1>
   <h3>All blind boxes are unopened. Price listed without shipping cost.</h3>
   
+<!--   <div style="text-align: center; margin-bottom: 20px;">Add commentMore actions
+    <input type="text" id="searchInput" placeholder="Search..." style="padding: 8px; width: 200px;">
+    <button onclick="handleSearch()" style="padding: 8px;">Search</button>
+  </div>
+  
+  <div id="filters" style="text-align: center; margin-bottom: 20px;">
+    <label><input type="checkbox" value="The Monsters" onchange="applyFilters()"> The Monsters</label>
+    <label><input type="checkbox" value="Crybaby" onchange="applyFilters()"> Crybaby</label>
+    <label><input type="checkbox" value="Coca-Cola" onchange="applyFilters()"> Coca-Cola</label>
+    <label><input type="checkbox" value="Exciting Macaron" onchange="applyFilters()"> Exciting Macaron</label>
+    <label><input type="checkbox" value="Have A Seat" onchange="applyFilters()"> Have A Seat</label>
+    <label><input type="checkbox" value="Wild but Cutie" onchange="applyFilters()"> Wild but Cutie</label>
+  </div> -->
+  
   <div class="top-bar">
   <div class="filters">
     <h4>Filter by Collection</h4>
@@ -235,21 +249,42 @@
       item.style.display = name.includes(query) ? 'block' : 'none';
     });
   }
-
   function applyFilters() {
-    const checkboxes = document.querySelectorAll('#filters input[type="checkbox"]');
+    const searchValue = document.getElementById('searchInput').value.toLowerCase();
+    const checkboxes = document.querySelectorAll('.filters input[type="checkbox"]');
     const activeFilters = Array.from(checkboxes)
-                              .filter(cb => cb.checked)
-                              .map(cb => cb.value.toLowerCase());
+      .filter(cb => cb.checked)
+      .map(cb => cb.value.toLowerCase());
 
     const items = document.querySelectorAll('.item');
 
     items.forEach(item => {
-      const name = item.querySelector('.item-name').textContent.toLowerCase();
-      const matchesFilter = activeFilters.length === 0 || activeFilters.some(f => name.includes(f));
-      item.style.display = matchesFilter ? 'block' : 'none';
+      const itemName = item.querySelector('.item-name').textContent.toLowerCase();
+
+      const matchesSearch = itemName.includes(searchValue);
+      const matchesFilter = activeFilters.length === 0 || activeFilters.some(filter => itemName.includes(filter));
+
+      if (matchesSearch && matchesFilter) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
     });
   }
+  // function applyFilters() {
+  //   const checkboxes = document.querySelectorAll('#filters input[type="checkbox"]');
+  //   const activeFilters = Array.from(checkboxes)
+  //                             .filter(cb => cb.checked)
+  //                             .map(cb => cb.value.toLowerCase());
+
+  //   const items = document.querySelectorAll('.item');
+
+  //   items.forEach(item => {
+  //     const name = item.querySelector('.item-name').textContent.toLowerCase();
+  //     const matchesFilter = activeFilters.length === 0 || activeFilters.some(f => name.includes(f));
+  //     item.style.display = matchesFilter ? 'block' : 'none';
+  //   });
+  // }
 </script>
 
 </body>
