@@ -49,25 +49,60 @@
       color: #e91e63;
       font-size: 1.1em;
     }
+    .top-bar {
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .filters {
+      width: 20%;
+      padding: 10px;
+    }
+    
+    .main-content {
+      width: 80%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    
+    .search-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+    
+    .search-bar input {
+      padding: 8px;
+      width: 200px;
+      margin-right: 8px;
+    }
+    
+    .search-bar button {
+      padding: 8px 12px;
+    }
+
   </style>
 </head>
 <body>
   <h1>Pop Mart Inventory</h1>
   <h3>All blind boxes are unopened. Price listed without shipping cost.</h3>
   
-  <div style="text-align: center; margin-bottom: 20px;">
-  <input type="text" id="searchInput" placeholder="Search..." style="padding: 8px; width: 200px;">
-  <button onclick="handleSearch()" style="padding: 8px;">Search</button>
-</div>
+  <div class="top-bar">
+  <div class="filters">
+    <h4>Filter by Collection</h4>
+    <label><input type="checkbox" value="The Monsters" onchange="applyFilters()"> The Monsters</label><br>
+    <label><input type="checkbox" value="Crybaby" onchange="applyFilters()"> Crybaby</label><br>
+    <label><input type="checkbox" value="Coca-Cola" onchange="applyFilters()"> Coca-Cola</label><br>
+    <label><input type="checkbox" value="Exciting Macaron" onchange="applyFilters()"> Exciting Macaron</label><br>
+    <label><input type="checkbox" value="Have A Seat" onchange="applyFilters()"> Have A Seat</label><br>
+    <label><input type="checkbox" value="Wild but Cutie" onchange="applyFilters()"> Wild but Cutie</label>
+  </div>
 
-<div id="filters" style="text-align: center; margin-bottom: 20px;">
-  <label><input type="checkbox" value="The Monsters" onchange="applyFilters()"> The Monsters</label>
-  <label><input type="checkbox" value="Crybaby" onchange="applyFilters()"> Crybaby</label>
-  <label><input type="checkbox" value="Coca-Cola" onchange="applyFilters()"> Coca-Cola</label>
-  <label><input type="checkbox" value="Exciting Macaron" onchange="applyFilters()"> Exciting Macaron</label>
-  <label><input type="checkbox" value="Have A Seat" onchange="applyFilters()"> Have A Seat</label>
-  <label><input type="checkbox" value="Wild but Cutie" onchange="applyFilters()"> Wild but Cutie</label>
-</div>
+  <div class="main-content">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search...">
+      <button onclick="handleSearch()">Search</button>
+    </div>
 
   <div class="inventory">
     <!-- Exciting Macaron -->
