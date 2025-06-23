@@ -88,6 +88,13 @@
     .search-bar button {
       padding: 8px 12px;
     }
+    <style>
+    .out-of-stock {
+      opacity: 0.4;
+      filter: grayscale(100%);
+    }
+</style>
+
 
   </style>
 </head>
@@ -114,6 +121,7 @@
   <div class="top-bar">
   <div class="filters">
     <h4>Filter by Collection</h4>
+    <label><input type="checkbox" id="inStockOnly" onchange="applyFilters()"> In Stock Only</label><br>
     <label><input type="checkbox" value="The Monsters" onchange="applyFilters()"> The Monsters</label><br>
     <label><input type="checkbox" value="Crybaby" onchange="applyFilters()"> Crybaby</label><br>
     <label><input type="checkbox" value="Coca-Cola" onchange="applyFilters()"> Coca-Cola</label><br>
@@ -334,7 +342,47 @@
       <div class="stock">In stock: SOLD OUT</div>
     </div>
   </div>
+  
   <script>
+  function handleSearch() {
+    applyFilters(); // reuse filtering logic
+  }
+
+  function applyFilters() {
+    const searchValue = document.getElementById('searchInput').value.toLowerCase();
+    const checkboxes = document.querySelectorAll('.filters input[type="checkbox"]:not(#inStockOnly)');
+    const activeFilters = Array.from(checkboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value.toLowerCase());
+    const inStockOnly = document.getElementById('inStockOnly').checked;
+
+    const items = document.querySelectorAll('.item');
+
+    items.forEach(item => {
+      const name = item.querySelector('.item-name').textContent.toLowerCase();
+      const stockText = item.querySelector('.stock')?.textContent.toLowerCase() || '';
+
+      // Gray out if sold out
+      if (stockText.includes("sold out")) {
+        item.classList.add('out-of-stock');
+      } else {
+        item.classList.remove('out-of-stock');
+      }
+
+      const matchesSearch = name.includes(searchValue);
+      const matchesFilter = activeFilters.length === 0 || activeFilters.some(filter => name.includes(filter));
+      const isInStock = !stockText.includes("sold out");
+
+      if (matchesSearch && matchesFilter && (!inStockOnly || isInStock)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+<!--   <script>
   function handleSearch() {
     const query = document.getElementById('searchInput').value.toLowerCase();
     const items = document.querySelectorAll('.item');
@@ -365,7 +413,7 @@
         item.style.display = 'none';
       }
     });
-  }
+  } -->
   // function applyFilters() {
   //   const checkboxes = document.querySelectorAll('#filters input[type="checkbox"]');
   //   const activeFilters = Array.from(checkboxes)
