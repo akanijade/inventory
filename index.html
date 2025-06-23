@@ -88,15 +88,24 @@
     .search-bar button {
       padding: 8px 12px;
     }
-    <style>
+    
     .out-of-stock {
       opacity: 0.4;
       filter: grayscale(100%);
     }
+    
+    .filters {
+    width: 20%;
+    padding: 10px;
+    position: sticky;
+    top: 20px; /* distance from top when it starts sticking */
+    align-self: flex-start;
+    background-color: #f9f9f9; /* optional: matches page background */
+    border-right: 1px solid #ccc;
+  }
+
 </style>
 
-
-  </style>
 </head>
 <body>
   <h1>Pop Mart Inventory</h1>
@@ -414,7 +423,7 @@
       }
     });
   } -->
-  // function applyFilters() {
+<!--   // function applyFilters() {
   //   const checkboxes = document.querySelectorAll('#filters input[type="checkbox"]');
   //   const activeFilters = Array.from(checkboxes)
   //                             .filter(cb => cb.checked)
@@ -427,7 +436,7 @@
   //     const matchesFilter = activeFilters.length === 0 || activeFilters.some(f => name.includes(f));
   //     item.style.display = matchesFilter ? 'block' : 'none';
   //   });
-  // }
+  // } -->
 <!-- </script> -->
 
 </body>
