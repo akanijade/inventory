@@ -130,7 +130,8 @@
   <div class="top-bar">
   <div class="filters">
     <h4>Filter by Collection</h4>
-    <label><input type="checkbox" id="inStockOnly" onchange="applyFilters()"> In Stock Only</label><br>
+<!--     <label><input type="checkbox" id="inStockOnly" onchange="applyFilters()"> In Stock Only</label><br> -->
+    <label><input type="checkbox" id="inStockOnly" onchange="inStockOnlyClicked = true; applyFilters()"> In Stock Only</label><br>
     <label><input type="checkbox" value="The Monsters" onchange="applyFilters()"> The Monsters</label><br>
     <label><input type="checkbox" value="Crybaby" onchange="applyFilters()"> Crybaby</label><br>
     <label><input type="checkbox" value="Coca-Cola" onchange="applyFilters()"> Coca-Cola</label><br>
@@ -395,6 +396,8 @@
   </div>
   
   <script>
+  let inStockOnlyClicked = false;
+
   function handleSearch() {
     applyFilters(); // reuse filtering logic
   }
@@ -428,8 +431,8 @@
       const name = item.querySelector('.item-name').textContent.toLowerCase();
       const stockText = item.querySelector('.stock')?.textContent.toLowerCase() || '';
 
-      // Only gray out sold-out items when "In Stock Only" is NOT checked
-      if (!inStockOnly && stockText.includes("sold out")) {
+      // Gray out sold-out items ONLY if user has checked the In Stock box at least once
+      if (inStockOnlyClicked && !inStockOnly && stockText.includes("sold out")) {
         item.classList.add('out-of-stock');
       } else {
         item.classList.remove('out-of-stock');
