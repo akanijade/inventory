@@ -407,8 +407,22 @@
       .map(cb => cb.value.toLowerCase());
     const inStockOnly = document.getElementById('inStockOnly').checked;
 
+    const inventory = document.querySelector('.inventory');
     const items = document.querySelectorAll('.item');
 
+    // Sort items: in stock first
+    items.sort((a, b) => {
+      const stockA = a.querySelector('.stock')?.textContent.toLowerCase() || '';
+      const stockB = b.querySelector('.stock')?.textContent.toLowerCase() || '';
+      const isInStockA = !stockA.includes('sold out');
+      const isInStockB = !stockB.includes('sold out');
+      return (isInStockB - isInStockA); // true > false
+    });
+
+    // Remove and re-append sorted items
+    items.forEach(item => inventory.appendChild(item));
+
+    // Then apply filters
     items.forEach(item => {
       const name = item.querySelector('.item-name').textContent.toLowerCase();
       const stockText = item.querySelector('.stock')?.textContent.toLowerCase() || '';
@@ -431,6 +445,10 @@
       }
     });
   }
+
+  // Auto-sort on page load
+  window.addEventListener('DOMContentLoaded', applyFilters);
+    
 </script>
 
 <!--   <script>
