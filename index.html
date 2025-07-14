@@ -408,7 +408,8 @@
     const inStockOnly = document.getElementById('inStockOnly').checked;
 
     const inventory = document.querySelector('.inventory');
-    const items = document.querySelectorAll('.item');
+    // const items = document.querySelectorAll('.item');
+    const items = Array.from(document.querySelectorAll('.item'));
 
     // Sort items: in stock first
     items.sort((a, b) => {
