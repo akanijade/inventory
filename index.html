@@ -428,12 +428,19 @@
       const name = item.querySelector('.item-name').textContent.toLowerCase();
       const stockText = item.querySelector('.stock')?.textContent.toLowerCase() || '';
 
-      // Gray out if sold out
-      if (stockText.includes("sold out")) {
+      // Only gray out sold-out items when "In Stock Only" is NOT checked
+      if (!inStockOnly && stockText.includes("sold out")) {
         item.classList.add('out-of-stock');
       } else {
         item.classList.remove('out-of-stock');
       }
+      
+      // Gray out if sold out
+      // if (stockText.includes("sold out")) {
+      //   item.classList.add('out-of-stock');
+      // } else {
+      //   item.classList.remove('out-of-stock');
+      // }
 
       const matchesSearch = name.includes(searchValue);
       const matchesFilter = activeFilters.length === 0 || activeFilters.some(filter => name.includes(filter));
