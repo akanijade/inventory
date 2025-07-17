@@ -131,7 +131,9 @@
   <div class="filters">
     <h4>Filter by Collection</h4>
 <!--     <label><input type="checkbox" id="inStockOnly" onchange="applyFilters()"> In Stock Only</label><br> -->
-    <label><input type="checkbox" id="inStockOnly" onchange="inStockOnlyClicked = true; applyFilters()"> In Stock Only</label><br>
+<!--     <label><input type="checkbox" id="inStockOnly" onchange="inStockOnlyClicked = true; applyFilters()"> In Stock Only</label><br> -->
+    <label><input type="checkbox" id="inStockOnly" onchange="handleInStockToggle()"> In Stock Only</label><br>
+
     <label><input type="checkbox" value="The Monsters" onchange="applyFilters()"> The Monsters</label><br>
     <label><input type="checkbox" value="Crybaby" onchange="applyFilters()"> Crybaby</label><br>
     <label><input type="checkbox" value="Coca-Cola" onchange="applyFilters()"> Coca-Cola</label><br>
@@ -216,19 +218,19 @@
     <div class="item">
       <img src="images/lychee berry.png" alt="THE MONSTERS - Exciting Macaron Vinyl Face Blind Box Lychee Berry">
       <div class="item-name">THE MONSTERS - Exciting Macaron Vinyl Face Blind Box Lychee Berry</div>
-      <div class="price">$48</div>
+      <div class="price">$60</div>
       <div class="stock">In stock: SOLD OUT</div>
     </div>
     <div class="item">
       <img src="images/toffee.png" alt="THE MONSTERS - Exciting Macaron Vinyl Face Blind Box Toffee">
       <div class="item-name">THE MONSTERS - Exciting Macaron Vinyl Face Blind Box Toffee</div>
-      <div class="price">$52</div>
+      <div class="price">$55</div>
       <div class="stock">In stock: 1</div>
     </div>
      <div class="item">
       <img src="images/soymilk.png" alt="THE MONSTERS - Exciting Macaron Vinyl Face Blind Box Soymilk">
       <div class="item-name">THE MONSTERS - Exciting Macaron Vinyl Face Blind Box Soymilk</div>
-      <div class="price">$55</div>
+      <div class="price">$60</div>
       <div class="stock">In stock: 1</div>
     </div> 
     <div class="item">
@@ -259,7 +261,7 @@
      <div class="item">
       <img src="images/ququ.png" alt="THE MONSTERS - Have A Seat Vinyl Face Blind Box Ququ">
       <div class="item-name">THE MONSTERS - Have A Seat Vinyl Face Blind Box Ququ</div>
-      <div class="price">$50</div>
+      <div class="price">$55</div>
       <div class="stock">In stock: 1</div>
      </div>
     <div class="item">
@@ -401,6 +403,10 @@
   function handleSearch() {
     applyFilters(); // reuse filtering logic
   }
+  function handleInStockToggle() {
+    inStockOnlyClicked = true;
+    applyFilters();
+  }
 
   function applyFilters() {
     const searchValue = document.getElementById('searchInput').value.toLowerCase();
@@ -432,11 +438,18 @@
       const stockText = item.querySelector('.stock')?.textContent.toLowerCase() || '';
 
       // Gray out sold-out items ONLY if user has checked the In Stock box at least once
+      // if (inStockOnlyClicked && !inStockOnly && stockText.includes("sold out")) {
+      //   item.classList.add('out-of-stock');
+      // } else {
+      //   item.classList.remove('out-of-stock');
+      // }
+      // Gray out sold-out items ONLY if user has checked the In Stock box at least once
       if (inStockOnlyClicked && !inStockOnly && stockText.includes("sold out")) {
         item.classList.add('out-of-stock');
       } else {
         item.classList.remove('out-of-stock');
       }
+
       
       // Gray out if sold out
       // if (stockText.includes("sold out")) {
