@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PopMart Inventory</title>
   <style>
+    html {
+    scroll-behavior: smooth;
+  }
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -103,11 +106,54 @@
     background-color: #f9f9f9; /* optional: matches page background */
     border-right: 1px solid #ccc;
   }
+  .navbar {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #e91e63;
+  font-weight: bold;
+  padding: 8px 12px;
+  border: 1px solid #e91e63;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #e91e63;
+  color: white;
+}
+
 
 </style>
 
 </head>
 <body>
+<nav class="navbar">
+  <div class="nav-container">
+    <span class="nav-logo">PopMart Inventory</span>
+    <a href="#contact" class="nav-link">Contact Us</a>
+  </div>
+</nav>
+
   <h1>PopMart Inventory</h1>
   <h2>All blind boxes are sealed. Prices exclude shipping.</h2>
 <!--   <h3>Sold out? Request it and we'll restock it for you!</h3> -->
@@ -522,6 +568,22 @@
   //   });
   // } -->
 <!-- </script> -->
+<!-- Contact Us Section -->
+<div id="contact" style="padding: 60px 20px; background-color: #f3f3f3;">
+  <h2 style="text-align:center;">Contact Us</h2>
+  <form action="https://formspree.io/f/xjkenkyg" method="POST" style="max-width: 500px; margin: 0 auto;">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+    <button type="submit">Send</button>
+  </form>
+</div>
 
 </body>
 </html>
